@@ -4,7 +4,7 @@ class Solution {
         Stack<Integer> st=new Stack<>();
         int[] ans=new int[n];
         for(int i=0;i<n;i++){
-            while(!st.isEmpty()&&temperatures[i]>temperatures[st.peek()]){
+            while(!st.isEmpty() && temperatures[i]>temperatures[st.peek()]){
                 int prev=st.pop();
                 ans[prev]=i-prev;
             }
