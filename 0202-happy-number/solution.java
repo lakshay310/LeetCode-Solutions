@@ -1,12 +1,12 @@
 class Solution {
     public boolean isHappy(int n) {
-      int slow=n;
-      int fast=getsquare(n);
-      while(fast!=1&&slow!=fast){
-        slow=getsquare(slow);
-        fast=getsquare(getsquare(fast));
-      }  
-      return fast==1;
+        int slow=n;
+        int fast=getsquare(n);
+        while(fast!=1&&slow!=fast){
+            slow=getsquare(slow);
+            fast=getsquare(getsquare(fast));
+        }
+        return fast==1;
     }
     private int getsquare(int n){
         int sum=0;
