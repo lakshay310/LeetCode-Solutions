@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/find-the-distinct-difference-array">Find the Distinct Difference Array</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr><p>You are given a <strong>0-indexed</strong> array <code>nums</code> of length <code>n</code>.</p>
+<p>You are given a <strong>0-indexed</strong> array <code>nums</code> of length <code>n</code>.</p>
 
 <p>The <strong>distinct difference</strong> array of <code>nums</code> is an array <code>diff</code> of length <code>n</code> such that <code>diff[i]</code> is equal to the number of distinct elements in the suffix <code>nums[i + 1, ..., n - 1]</code> <strong>subtracted from</strong> the number of distinct elements in the prefix <code>nums[0, ..., i]</code>.</p>
 
