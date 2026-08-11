@@ -1,33 +1,28 @@
 class Solution {
     public String predictPartyVictory(String senate) {
-        char[] arr = senate.toCharArray();
-        int n = arr.length;
-        boolean[] banned = new boolean[n];
-        while (true) {
-            for (int i = 0; i < n; i++) {
-                if (banned[i]) continue;
-                char target = (arr[i] == 'R') ? 'D' : 'R';
-                boolean opponentBanned = false;
-                for (int j = i + 1; j < n; j++) {
-                    if (!banned[j] && arr[j] == target) {
-                        banned[j] = true;
-                        opponentBanned = true;
-                        break;
-                    }
-                }
-                if (!opponentBanned) {
-                    for (int j = 0; j < i; j++) {
-                        if (!banned[j] && arr[j] == target) {
-                            banned[j] = true;
-                            opponentBanned = true;
-                            break;
-                        }
-                    }
-                }
-                if (!opponentBanned) {
-                    return arr[i] == 'R' ? "Radiant" : "Dire";
-                }
+        Queue<Integer> rq=new LinkedList<>();
+        Queue<Integer> dq=new LinkedList<>();
+        int n=senate.length();
+        for(int i=0;i<n;i++){
+            if(senate.charAt(i)=='R'){
+                rq.offer(i);
+            }else{
+                dq.offer(i);
             }
         }
+        while(!rq.isEmpty()&&!dq.isEmpty()){
+            int r=rq.poll();
+            int d=dq.poll();
+            if(r<d){
+                rq.offer(r+n);
+            }else{
+                dq.offer(d+n);
+            }
+        }
+        if(rq.isEmpty()){
+            return "Dire";
+        }
+        return "Radiant";
+        
     }
 }
