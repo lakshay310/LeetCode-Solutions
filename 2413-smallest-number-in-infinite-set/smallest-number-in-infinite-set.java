@@ -1,23 +1,20 @@
 class SmallestInfiniteSet {
-    List<Integer> avano;
-
+    PriorityQueue<Integer> q;
+    int counter;
     public SmallestInfiniteSet() {
-        avano=new ArrayList<>();
-        for(int i=1;i<=2000;i++){
-            avano.add(i);
-        }
+        q=new PriorityQueue<>();
+        counter=1;
     }
     
     public int popSmallest() {
-        Collections.sort(avano);
-        return avano.remove(0);
+        if(q.size()==0) return counter++;
+        return q.poll();
     }
     
     public void addBack(int num) {
-        if(!avano.contains(num)){
-            avano.add(num);
+        if(!q.contains(num)&&counter>num){
+            q.add(num);
         }
-        
     }
 }
 
