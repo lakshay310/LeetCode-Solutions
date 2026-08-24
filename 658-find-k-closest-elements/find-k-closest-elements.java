@@ -1,23 +1,24 @@
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        List<Integer> ls = new ArrayList<>();
-        for (int num : arr) {
-            ls.add(num);
+    //maxheap in pair
+    PriorityQueue<int[]> mh=new PriorityQueue<>(
+        (a,b)->{
+            if(a[0]!=b[0])
+            return b[0]-a[0];//max diss
+            return b[1]-a[1];
         }
-        while (ls.size() > k) {
-            int maxDiff = -1;
-            int maxIdx = -1;
-            for (int i = 0; i < ls.size(); i++) {
-                int diff = Math.abs(ls.get(i) - x);
-                if (diff > maxDiff) {
-                    maxDiff = diff;
-                    maxIdx = i;
-                } else if (diff == maxDiff && ls.get(i) > ls.get(maxIdx)) {
-                    maxIdx = i;
-                }
-            }
-            ls.remove(maxIdx); 
+    );
+        int n=arr.length;
+        for(int i=0;i<n;i++){
+            int dis=Math.abs(arr[i]-x);
+         mh.add(new int[]{dis, arr[i]});
+            if(mh.size()>k) mh.poll();
         }
-        return ls;
+        List<Integer> ans=new ArrayList<>();
+        while(!mh.isEmpty()){
+            ans.add(mh.poll()[1]);
+        }
+        Collections.sort(ans);
+        return ans;
     }
 }
