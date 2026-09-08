@@ -1,23 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        int n=intervals.length;
-        int[][] comb=new int[n+1][2];
-        for(int i=0;i<n;i++){
-            comb[i]=intervals[i];
+        List<int[]> result = new ArrayList<>();
+        int i = 0;
+        int n = intervals.length;
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            result.add(intervals[i]);
+            i++;
         }
-        comb[n]=newInterval;
-        Arrays.sort(comb,Comparator.comparingInt(a->a[0]));
-        List<int[]> merged=new ArrayList<>();
-        int[] curr=comb[0];
-        merged.add(curr);
-        for(int i=1;i<comb.length;i++){
-            if(curr[1]>=comb[i][0]){
-                curr[1]=Math.max(curr[1],comb[i][1]);
-            }else{
-                curr=comb[i];
-                merged.add(curr);
-            }
+        while (i < n && intervals[i][0] <= newInterval[1]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
         }
-        return merged.toArray(new int[merged.size()][]);
+        result.add(newInterval); 
+        while (i < n) {
+            result.add(intervals[i]);
+            i++;
+        }
+        return result.toArray(new int[result.size()][]);
     }
 }
