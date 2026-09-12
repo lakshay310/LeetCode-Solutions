@@ -1,5 +1,6 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
+        //Maxheap application
        PriorityQueue<Integer> max=new PriorityQueue<>(Collections.reverseOrder());
        for(int st:stones){
         max.add(st);
