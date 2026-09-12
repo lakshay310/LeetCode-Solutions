@@ -1,17 +1,17 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        int n=stones.length;
-        while(n>1){
-            Arrays.sort(stones,0,n);
-            int y=stones[n-1];
-            int x=stones[n-2];
-            if(x==y){
-                n-=2;
-            }else{
-                stones[n-2]=y-x;
-                n-=1;
-            }
+       PriorityQueue<Integer> max=new PriorityQueue<>(Collections.reverseOrder());
+       for(int st:stones){
+        max.add(st);
+       } 
+       while(max.size()>=2){
+        int y=max.poll();
+        int x=max.poll();
+        if(x==y) continue;
+        if(y!=x){
+            max.add(y-x);
         }
-        return n==1?stones[0]:0;
+       }
+       return max.size()==1?max.peek():0;
     }
 }
