@@ -8,9 +8,7 @@ class Solution {
         if (n <= 11) return 11;
         for (int i = 10; i < 100000; i++) {
             String s = String.valueOf(i);
-            String rev = new StringBuilder(s.substring(0, s.length() - 1))
-                    .reverse()
-                    .toString();
+            String rev = new StringBuilder(s.substring(0, s.length() - 1)).reverse().toString();
             int num = Integer.parseInt(s + rev);
             if (num >= n && isPrime(num)) {
                 return num;
