@@ -1,21 +1,14 @@
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
-        int[] sums=new int[1];
-        sums[0]=0;
-        for(int num:nums){
-            int[] newSums=new int[sums.length*2];
-            for(int i=0;i<sums.length;i++){
-                newSums[2*i]=sums[i]+num;
-                newSums[2*i+1]=sums[i]-num;
-            }
-            sums=newSums;
+return solve(nums,0,0,target);
+    }
+    public int solve(int[] nums,int index, int sum, int target){
+        if(index==nums.length){
+            if(sum==target) return 1;
+            return 0;
         }
-        int count=0;
-        for(int sum:sums){
-            if(sum==target){
-                count++;
-            }
-        }
-        return count;
+        int add=solve(nums,index+1,sum+nums[index],target);
+        int subtract=solve(nums,index+1,sum-nums[index],target);
+        return add+subtract;
     }
 }
