@@ -1,18 +1,20 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> a=new ArrayList<>();
-        int total=1<<n;
-        for(int mask=0;mask<total;mask++){
-            List<Integer> temp=new ArrayList<>();
-            for(int i=0;i<n;i++){
-                if((mask&(1<<i))!=0){
-                    temp.add(i+1);
-                }
-            }
-            if(temp.size()==k){
-                a.add(temp);
-            }
+        List<List<Integer>> ans = new ArrayList<>();
+        solve(1, n, k, new ArrayList<>(), ans);
+        return ans;
+    }
+    public void solve(int start, int n, int k,
+                      List<Integer> list,
+                      List<List<Integer>> ans) {
+        if (list.size() == k) {
+            ans.add(new ArrayList<>(list));
+            return;
         }
-        return a;
+        for (int i = start; i <= n; i++) {
+            list.add(i);
+            solve(i + 1, n, k, list, ans);
+            list.remove(list.size() - 1);
+        }
     }
 }
