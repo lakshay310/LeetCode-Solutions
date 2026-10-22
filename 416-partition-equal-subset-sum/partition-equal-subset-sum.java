@@ -15,7 +15,6 @@ class Solution {
             return res;
         }
     }
-
     public boolean canPartition(int[] nums) {
         int sum = 0;
         int n = nums.length;
