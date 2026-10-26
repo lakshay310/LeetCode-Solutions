@@ -4,34 +4,33 @@
  * @return {Array<Array<number>>}
  */
 Array.prototype.snail = function(rowsCount, colsCount) {
-    if (this.length !== rowsCount * colsCount) {
-        return [];
+    if(rowsCount * colsCount !== this.length){
+        return []
     }
 
-    const res = Array.from({ length: rowsCount }, () => Array(colsCount));
-    let r = 0, c = 0, goingDown = true;
+    const result = []
+    for(let i = 0; i < rowsCount; i++){
+        result.push([])
+    }
 
-    for (let i = 0; i < this.length; i++) {
-        res[r][c] = this[i];
-        if (goingDown) {
-            if (r + 1 < rowsCount) {
-                r++;
-            } else {
-                c++;
-                goingDown = false;
-            }
+    for(let i = 0; i < this.length; i++){
+        const col = Math.floor(i / rowsCount)
+        const pos = i % rowsCount
+
+        let row
+
+        if(col % 2 === 0){
+            row = pos
         } else {
-            if (r - 1 >= 0) {
-                r--;
-            } else {
-                c++;
-                goingDown = true;
-            }
+            row = rowsCount - 1 - pos
         }
+      result[row].push(this[i])
+
+  
     }
 
-    return res;
-};
+    return result
+}
 
 /**
  * const arr = [1,2,3,4];
